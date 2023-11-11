@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- import JavaScript -->
+  <script defer src="script.js"></script>
+
+  <!-- import CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <title>PuppyBowl</title>
+</head>
+
+  <body>
+    <!-- form to add new players -->
+    <section class="addDog" id="addDog">
+      
+
+      <form>
+        <h2 class ="heading">Dog Entry <span>Form</span></h2>
+        <div class="form-box">
+          <input type="text" id="dog-name" placeholder="Dog's Name">
+          <input type="text" id="dog-breed" placeholder="Breed">
+        </div>
+        <div class="form-box">
+          <input type="number" id="team" placeholder="Team 1 or 2">
+          <input type="text" id="status" placeholder="Field or Bench">
+        </div>
+        <div class="form-box">
+          <input type="text" id="img-url" placeholder="Picture URL">
+          <input type="submit" value="Submit" class="btn">
+        </div>
+      </form>
+    </section>
+
+    <main>
+      <div class="Dog-Container" id="Dog-Container">
+        <div class ="all-players-box" id="all-players-box">
+          <h3>Dogs name</h3>
+          <img id="pic" src="https://placeholderkitten.com/50/50">
+          <p id="Breed">Dog Breed:</p>
+          <p id="teamId">Team:</p>
+          <p id="Status">Status:</p>
+          <a href="#" class="btn">More Details</a>
+        </div>
+      </div>
+
+    </main>
+  </body>
+</html>
