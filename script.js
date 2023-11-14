@@ -8,11 +8,12 @@ const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/players`;
 
 const mainEL = document.querySelector('main');
 const formEl = document.querySelector('form');
-const dogName = document.querySelector('#dog-name'); 
-const dogBreed = document.querySelector('#dog-breed'); 
-const dogTeam = document.querySelector('#team'); 
+const dogName = document.querySelector('#dogName'); 
+const dogBreed = document.querySelector('#dogBreed'); 
+const dogTeam = document.querySelector('#teamId'); 
 const dogStatus = document.querySelector('#status'); 
-const dogImgUrl = document.querySelector('#img-url'); 
+const dogImgUrl = document.querySelector('#imgUrl'); 
+
 const state = {playerList: [],
 };
 /**
@@ -33,31 +34,37 @@ const fetchAllPlayers = async () => {
 
 const fetchSinglePlayer = async (playerId) => {
     try {
-
+        const response = await fetch(`${APIURL}/${playerId}`);
+        const data = await response.json();
+        return data.data.player;
     } catch (err) {
         console.error(`Oh no, trouble fetching player #${playerId}!`, err);
     }
 };
 
-const addNewPlayer = async (playerObj) => {
-    try {
-
-    } catch (err) {
-        console.error('Oops, something went wrong with adding that player!', err);
+mainEL.addEventListener('click', async (event) => {
+    if(event.target.matches(".deleteButton")){
+        const id = event.target.dataset.id;
+        await fetch (`${APIURL}/${id}`, {
+            method: 'DELETE',
+        });
+        init();
     }
-};
+});
 
-const removePlayer = async (playerId) => {
-    try {
-
-    } catch (err) {
-        console.error(
-            `Whoops, trouble removing player #${playerId} from the roster!`,
-            err
-        );
+mainEL.addEventListener('click', async (event) => {
+    if(event.target.matches(".moreDetails")){
+        const id = event.target.dataset.id;
+        const singlePlayer = await fetchSinglePlayer(id);
+        renderSinglePlayer(singlePlayer);
     }
-};
+})
 
+mainEL.addEventListener('click', async (event) => {
+    if(event.target.matches(".returnButton")){
+        init();
+    }
+})
 /**
  * It takes an array of player objects, loops through them, and creates a string of HTML for each
  * player, then adds that string to a larger string of HTML that represents all the players. 
@@ -82,46 +89,102 @@ function renderAllPlayers(playerList)  {
     try {
         const template = playerList.players.map(list => {
             return (
-                `<div class ="all-players-box" id="all-players-box">
-                <h3>${list.name}</h3>
-                <img id="pic" src="${list.imageUrl}">
-                <p id="Breed">Dog Breed: ${list.breed}</p>
-                <p id="teamId">Team: ${list.teamId}</p>
-                <p id="Status">Status: ${list.status}</p>
-                <a href="#" class="btn">More Details</a>
+
+                `<div class="card">
+                    <h3>${list.name}</h3>
+                    <div class="image">
+                        <img id="pic" src="${list.imageUrl}">
+                    </div>
+
+                    <div class="Dog-info">
+                        <span class="info" id="Breed">${list.breed}</span>
+                        <span class="info" id="teamId">Team: ${list.teamId} </span>
+                        <span class="info" id="Status">Status: ${list.status}</span>
+                    </div>
+
+                    <div class="Button">
+                    <button class="moreDetails" data-id="${list.id}">More Details</button>
+                    <button data-id="${list.id}" class="deleteButton">Delete</button>
+                    </div>
                 </div>`
             )
         }).join('');
         mainEL.innerHTML = template;
+
+        
     } catch (err) {
         console.error('Uh oh, trouble rendering players!', err);
     }
 };
 
-
-/**
- * It renders a form to the DOM, and when the form is submitted, it adds a new player to the database,
- * fetches all players from the database, and renders them to the DOM.
- */
-const renderNewPlayerForm = () => {
+function renderSinglePlayer(singlePlayer){
     try {
-        
+        const singleTemplate = 
+                `<div class="card">
+                    <h3>${singlePlayer.name}</h3>
+                    <div class="image">
+                        <img id="pic" src="${singlePlayer.imageUrl}">
+                    </div>
+                    <div class="Dog-info">
+                        <span class="info" id="Breed">${singlePlayer.breed}</span>
+                        <span class="info" id="teamId">Team: ${singlePlayer.teamId} </span>
+                        <span class="info" id="Status">Status: ${singlePlayer.status}</span>
+                        <span class="info" id="createdAt">Created at: ${singlePlayer.createdAt}</span>
+                        <span class="info" id="updatedAt">Updated at: ${singlePlayer.updatedAt}</span>
+
+                    </div>
+                    <div class="Button">
+                    <button class= "returnButton">Return</Button>
+                    </div>
+
+                </div>`
+        mainEL.innerHTML = singleTemplate;
     } catch (err) {
-        console.error('Uh oh, trouble rendering the new player form!', err);
+        console.error('Uh oh, trouble rendering Single player!', err);
     }
-}
+
+    }
+
+
 
 const init = async () => {
     const players = await fetchAllPlayers();
     renderAllPlayers(players);
 
-    renderNewPlayerForm();
 }
 
 init();
 
-// Form Function to adjust text area
-function adjust_textarea(h) {
-    h.style.height = "20px";
-    h.style.height = (h.scrollHeight)+"px";
-}
+formEl.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    try {
+        await fetch(APIURL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name: dogName.value,
+              breed: dogBreed.value,
+              imageUrl: dogImgUrl.value,
+              teamId: teamId.value,
+              status: Status.value,
+            })
+          });
+        
+          dogName.value = '';
+          dogBreed.value = '';
+          imgUrl.value = '';
+          teamId.value = '';
+          Status.value = '';
+        
+          init();
+        } catch (err) {
+          console.error(err);
+        }
+      });
+
+
+ 
+
+

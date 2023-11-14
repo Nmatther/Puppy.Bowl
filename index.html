@@ -19,19 +19,18 @@
     <!-- form to add new players -->
     <section class="addDog" id="addDog">
       
-
       <form>
         <h2 class ="heading">Dog Entry <span>Form</span></h2>
         <div class="form-box">
-          <input type="text" id="dog-name" placeholder="Dog's Name">
-          <input type="text" id="dog-breed" placeholder="Breed">
+          <input type="text" id="dogName" placeholder="Dog's Name">
+          <input type="text" id="dogBreed" placeholder="Breed">
         </div>
         <div class="form-box">
-          <input type="number" id="team" placeholder="Team 1 or 2">
+          <input type="number" id="teamId" placeholder="Team 1 or 2">
           <input type="text" id="status" placeholder="Field or Bench">
         </div>
         <div class="form-box">
-          <input type="text" id="img-url" placeholder="Picture URL">
+          <input type="text" id="imgUrl" placeholder="Picture URL">
           <input type="submit" value="Submit" class="btn">
         </div>
       </form>
@@ -39,16 +38,26 @@
 
     <main>
       <div class="Dog-Container" id="Dog-Container">
-        <div class ="all-players-box" id="all-players-box">
-          <h3>Dogs name</h3>
-          <img id="pic" src="https://placeholderkitten.com/50/50">
-          <p id="Breed">Dog Breed:</p>
-          <p id="teamId">Team:</p>
-          <p id="Status">Status:</p>
-          <a href="#" class="btn">More Details</a>
-        </div>
-      </div>
+  
+          <div class="card">
+            
+              <h3>Dogs name</h3>
+            
+              <img class="image" id="pic" src="">
 
+            <div class="Dog-info">
+            <span class="info" id="Breed"></span>
+            <span class="info" id="teamId">Team:</span>
+            <span class="info" id="Status">Status:</span>
+            </div>
+
+            <div class="Button">
+            <button class="moreDetails">More Details</button>
+            <button class="delete">Delete</button>
+            </div>
+          </div>
+        
+      </div>
     </main>
   </body>
 </html>

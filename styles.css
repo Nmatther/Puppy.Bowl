@@ -25,6 +25,7 @@ html {
 main {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: space-evenly;
 	
 }
 
@@ -33,48 +34,123 @@ body {
 	color: var(--text-color);
 }
 
-.Dog-Container {
+
+
+ .Dog-Container {
 	display: flex;
-	align-content: center;
-	margin: 100rem;
-}
- .all-players-box  {
+	flex-wrap: wrap;
+	flex-direction: row;
 	background: var(--second-bg-color);
 	border-radius: 2rem;
-	height: 525px;
-	width: 275px;
+	height: 625px;
+	width: 600px;
 	border: 4px solid var(--bg-color);
 	transition: .5s ease;
+	justify-content: space-between;
 }
 
-.all-players-box:hover {
+.card:hover {
 	border-color: var(--main-color);
 	transform: scale(1.02);
 }
 
-.all-players-box  h3 {
-	font-size: 3.6rem;
-	text-align: center;
+
+.card .Dog-info {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 10px;
+	font-size: 1.3rem;
+}
+.card h3 {
+	justify-content: center;
+	align-items: center;
+	font-size: 3rem;
+	
 }
 
-.all-players-box p 
-{
-	font-size: 1.5rem;
-	text-align: left;
-	padding: 5px 0px 0px 0px;
-	margin-left: 5px;
+.card .image {
+	display: flex;
+	width: 130px;
+	height: 130px;
+	border-radius: 50%;
+	align-content: center;
+	justify-content: center;
 }
 
-.all-players-box img {
-	border-radius: 10%;
-	width: 250px;
-	height: 250px;
-	padding: 5px 2px 2px 2px;
+.card .image img {
+	width: 100% ;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 50%;
+	border: .2rem solid var(--main-color);
+	box-shadow: 0 0 1rem var(--main-color);
 }
+
+.card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: var(--second-bg-color);
+	border-radius: 20px;
+	width: 300px;
+	border: .2rem solid var(--main-color);
+}
+
+.card .deleteButton{
+	display: inline-block;
+	border: #0ef;
+	background-color: var(--second-bg-color);
+	margin-bottom: 3px;
+	max-width: fit-content;
+}
+
+.Button .moreDetails {
+	border: .2rem solid var(--main-color);
+	border-radius: 3rem;
+	background-color: var(--second-bg-color);
+	color: var(--text-color);
+	padding: .75rem;
+	box-shadow: 0 0 1rem var(--main-color);
+}
+
+.Button .deleteButton {
+	border: .2rem solid var(--main-color);
+	border-radius: 3rem;
+	background-color: var(--second-bg-color);
+	color: var(--text-color);
+	padding: .75rem;
+	box-shadow: 0 0 1rem var(--main-color);
+}
+
+.Button .returnButton {
+	border: .2rem solid var(--main-color);
+	border-radius: 3rem;
+	background-color: var(--second-bg-color);
+	color: var(--text-color);
+	padding: .75rem;
+	box-shadow: 0 0 1rem var(--main-color);
+}
+
+.Button .moreDetails:hover {
+	box-shadow: none;
+}
+
+.Button .returnButton:hover {
+	box-shadow: none;
+}
+
+.Button .deleteButton:hover {
+	box-shadow: none;
+}
+
+
+/* Form CSS */
 
 .btn {
 	display: inline-block;
-	font-size: 1.5rem;
+	padding: .75rem;
+	font-size: 2.5rem;
 	background: var(--main-color);
 	border: .2rem solid var(--main-color);
 	border-radius: 4rem;
@@ -83,6 +159,7 @@ body {
 	font-weight: 600;
 	transition: .5s ease;
 	align-content: center;
+	justify-content: center;
 }
 
 .btn:hover {
@@ -111,7 +188,7 @@ body {
 .addDog form .form-box input{
 	width: 100%;
 	padding: 1.5rem;
-	font-size: 1.8rem;
+	font-size: 1.4rem;
 	color: var(--text-color);
 	background-color: var(--second-bg-color);
 	border-radius: .8rem;
